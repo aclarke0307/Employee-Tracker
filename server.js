@@ -61,3 +61,92 @@ function start(){
         }
     });
 }
+//Add department function
+function addDepartment(){
+    inquirer
+       .prompt({
+           type: "input",
+           message: "what is the name of the department you want to add?",
+           name: "department"
+       })
+       .then(function(res){
+           const department = res.department;
+           const query = `INSERT INTO department (name) VALUES("${department}")`;
+           connection.query(query, function(err, res){
+               if(err) throw err;
+               console.table(res);
+               start();
+           });
+       });
+}
+///Add role function
+function addRole(){
+    inquirer
+    .prompt(
+        [  {
+            type:"input",
+            message: "What job title do you want to add",
+            name: "title"
+           },
+           {
+               type: "input",
+               message: "What salary would you like to add",
+               name: "salary"
+           },
+           {
+               type: "input",
+               message: "What is the department ID?",
+               name: "departmentID"
+           }
+        ]
+    )
+    .then(function(res){
+        const title = res.title;
+        const salary = res.salary;
+        const departmentID = res.departmentID;
+        const query = `INSERT INTO role (title, salary, department_id) VALUE("${title}", "${salary}", "${departmentID}")`;
+        connection.query(query, function(err, res){
+            if(err) throw err;
+            console.table(res);
+            start();
+        });
+    });
+}
+///add employee function
+function addEmployee(){
+    inquirer
+    .prompt([
+        {
+            type: "input",
+            message: "What is employee's first name?",
+            name: "firstName"
+        },
+        {
+            type: "input",
+            message: "What is employee's last name?",
+            name: "lastName"
+        },
+        {
+            type:"input",
+            message: "What is employee's role ID?",
+            name: "roleID"
+        },
+        {
+            type: "input",
+            message: "What is employee's manager ID?",
+            name: "managerID"
+        }
+    ])
+    .then(function(res){
+        const firstName = res.firstName;
+        const lastName = res.lastName;
+        const roleID = res.roleID;
+        const managerID = res.managerID;
+        const query =`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUE("${firstName}", "${lastName}", "${roleID}", "${managerID}")`;
+        connect.query(query, function(err, res){
+            if(err) throw err;
+            console.table(res);
+            start();
+        });
+    });
+}
