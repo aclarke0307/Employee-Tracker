@@ -8,7 +8,7 @@ Node.js, inquirer, mysql, console.table
 
 ## Video Clip
 
-https://drive.google.com/file/d/1A_Gu1fW5lEilKVG9j-Dzv0KkgTbGt-5K/preview
+https://drive.google.com/file/d/1A_Gu1fW5lEilKVG9j-Dzv0KkgTbGt-5K/view
 
 ### Contribution
 aclarke0307
