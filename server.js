@@ -1,11 +1,10 @@
-const mysql = require('mysql');
-const inquirer = require('inquirer');
-const consoleTable = require('console.table');
+const mysql = require("mysql2");
+const inquirer = require("inquirer");
+const consoleTable = require("console.table");
 
 // mysql connection 
 const connection = mysql.createConnection({
     host: 'localhost',
-    port: 3001,
     user: 'root',
     password: 'Thinkpadchester1!',
     database: 'business'
@@ -143,10 +142,51 @@ function addEmployee(){
         const roleID = res.roleID;
         const managerID = res.managerID;
         const query =`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUE("${firstName}", "${lastName}", "${roleID}", "${managerID}")`;
-        connect.query(query, function(err, res){
+        connection.query(query, function(err, res){
             if(err) throw err;
             console.table(res);
             start();
         });
+    });
+}
+// view functions
+function viewDepartment(){
+    const query = "SELECT * FROM department";
+    connection.query(query, function(err, res){
+        if(err) throw err;
+        console.table(res);
+        start();
+    });
+}
+function viewEmployee(){
+    const query = "SELECT * FROM employee";
+    connection.query(query, function(err, res){
+        if(err) throw err;
+        console.table(res);
+        start();
+    });
+}
+function viewRole(){
+    const query = "SELECT * FROM role";
+    connection.query(query, function(err, res){
+        if(err) throw err;
+        console.table(res);
+        start();
+    });
+}
+///update function
+function updateEmployeeRole(){
+    const query = "SELECT id, first_name, last_name, role_id FROM employee";
+    connection.query(query, function(err, res){
+        if(err) throw err;
+        console.table(res);
+        {
+            inquirer
+            .prompt({
+                type: "input",
+                message: "Which employee(s) needs a role update?",
+                name: "employee"
+            });
+        }
     });
 }
